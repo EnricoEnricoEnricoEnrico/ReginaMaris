@@ -8,9 +8,13 @@ Original file is located at
 """
 
 import pandas as pd
+import requests
+import time
 
 url = "https://marinetraffic.live/fetchAIS2.php/requests/vesselsonmaptempTTT.php?type=json&seltype=0&selid=244528000"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
+antwort = requests.get(url, headers = headers)
+antwort
 
 df = pd.read_json(url)
 df
@@ -40,7 +44,7 @@ if polygon_hh.contains(position):
 elif polygon_ki.contains(position):
   message = "Der Traditionssegler Regina Maris befindet sich in Kiel."
 else:
-  message = "Der Traditionssegler Regina Maris ist weder in Hamburg noch in Kiel."
+  message = "Die letzte Position der Regina Maris war hier https://maps.google.com/?q={},{}".format(lat, lon)
 
 myTeamsMessage.text(message)
 myTeamsMessage.send()
