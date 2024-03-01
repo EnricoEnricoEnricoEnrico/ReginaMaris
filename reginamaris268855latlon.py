@@ -42,7 +42,7 @@ if polygon_hh.contains(position):
 elif polygon_ki.contains(position):
   message = ("Der Traditionssegler Regina Maris befindet sich in Kiel.")
 else:
-  message = ("Der Traditionssegler Regina Maris ist weder in Hamburg noch in Kiel."
+  message = ("Der Traditionssegler Regina Maris ist weder in Hamburg noch in Kiel.")
 
 myTeamsMessage.text(message)
 myTeamsMessage.send()
