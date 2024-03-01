@@ -4,3 +4,4 @@ shapely
 lxml
 regex
 bs4
+requests
