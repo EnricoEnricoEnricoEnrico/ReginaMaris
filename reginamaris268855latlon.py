@@ -9,12 +9,25 @@ Original file is located at
 
 import pandas as pd
 import requests
-import time
+import datetime
+from bs4 import BeautifulSoup
+import regex
 
 url = "https://marinetraffic.live/fetchAIS2.php/requests/vesselsonmaptempTTT.php?type=json&seltype=0&selid=244528000"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
-antwort = requests.get(url, headers = headers)
-antwort
+
+timeurl = "https://marinetraffic.live/vessels.php/regina-maris-position/244528000/"
+antwort = requests.get(timeurl)
+
+antwort.text  #url mit der Website, die das Datum des letzten Positionsübertragung enthält
+
+suppe = BeautifulSoup(antwort.text, 'lxml') #alles als text reinholen
+
+fundstelle = suppe.find(string=regex.compile('as reported on')) #String 'as reported on' per re-Module finden
+
+zeitstempel = fundstelle.find_next("strong").text #danach kommt der Zeitstempel im TAG "strong"
+
+zeitstempel
 
 df = pd.read_json(url)
 df
@@ -25,6 +38,7 @@ lon = float(df.iloc[5, 0])
 from shapely.geometry import Point, Polygon
 
 import pymsteams
+
 myTeamsMessage = pymsteams.connectorcard("https://mdrde.webhook.office.com/webhookb2/60ef16f8-fa87-4c0e-9cc4-c830fe8ac9d3@528d1628-15c0-4deb-ae8d-5a3f37f82b5c/IncomingWebhook/18703ce4f61d41f29dc8810b83fbf3f9/37da9787-3764-49e2-9b44-2338c6b46416")
 
 # Definiere die Eckpunkte des Polygons als Liste von (lon, lat)-Tupeln
@@ -44,7 +58,9 @@ if polygon_hh.contains(position):
 elif polygon_ki.contains(position):
   message = "Der Traditionssegler Regina Maris befindet sich in Kiel."
 else:
-  message = "Die letzte Position der Regina Maris war hier https://maps.google.com/?q={},{}".format(lat, lon)
+  message = "Die letzte Position der Regina Maris war am {} hier https://maps.google.com/?q={},{}".format(zeitstempel, lat, lon)
+
+  message
 
 myTeamsMessage.text(message)
 myTeamsMessage.send()
