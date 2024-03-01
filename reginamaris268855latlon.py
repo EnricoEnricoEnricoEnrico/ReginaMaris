@@ -36,11 +36,11 @@ position = Point(lon, lat)
 
 # lon und lat sind die Längen- und Breitengrade deiner Position# Überprüfe, ob sich die Position innerhalb des Polygons befindet
 if polygon_hh.contains(position):
-  message = ("Der Traditionssegler Regina Maris befindet sich in Hamburg.")
+  message = "Der Traditionssegler Regina Maris befindet sich in Hamburg."
 elif polygon_ki.contains(position):
-  message = ("Der Traditionssegler Regina Maris befindet sich in Kiel.")
+  message = "Der Traditionssegler Regina Maris befindet sich in Kiel."
 else:
-  message = ("Der Traditionssegler Regina Maris ist weder in Hamburg noch in Kiel.")
+  message = "Der Traditionssegler Regina Maris ist weder in Hamburg noch in Kiel."
 
 myTeamsMessage.text(message)
 myTeamsMessage.send()
