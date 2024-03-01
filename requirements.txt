@@ -1,3 +1,6 @@
 pandas
 pymsteams
 shapely
+lxml
+regex
+bs4
