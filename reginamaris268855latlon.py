@@ -8,8 +8,6 @@ Original file is located at
 """
 
 import pandas as pd
-import requests
-import time
 
 url = "https://marinetraffic.live/fetchAIS2.php/requests/vesselsonmaptempTTT.php?type=json&seltype=0&selid=244528000"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
