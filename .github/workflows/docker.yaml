@@ -29,7 +29,7 @@ jobs:
     - run: |
        python -VV
        pip install -r requirements.txt
-       python ReginaMaris268855LatLon.ipynb #hier wird die Python-Datei eingefügt
+       python ReginaMaris268855LatLon.py #hier wird die Python-Datei eingefügt
        
     # Available enviroment variables
    #   environment: |
