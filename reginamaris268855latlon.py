@@ -63,3 +63,7 @@ elif polygon_ki.contains(position):
     myTeamsMessage.send()
 else:
   message = "Die letzte Position der Regina Maris war am {} hier https://maps.google.com/?q={},{}".format(zeitstempel, lat, lon)
+message
+
+myTeamsMessage.text(message)
+myTeamsMessage.send()
