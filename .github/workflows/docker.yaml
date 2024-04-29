@@ -28,7 +28,7 @@ jobs:
         python-version: '3.10' 
     - run: |
        python -VV
-       pip install --update
+       pip install -r requirements.txt
        python reginamaris268855latlon.py #hier wird die Python-Datei eingefügt
        
     # Available enviroment variables
